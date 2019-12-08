@@ -1,4 +1,4 @@
-name: Node CI v1.0
+name: Node CI v1.1
 
 on: [push]
 
