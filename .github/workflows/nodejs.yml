@@ -32,5 +32,5 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           directory: ./build
-          branch: HEAD:refs/heads/deploy
+          branch: refs/heads/deploy
           github_token: ${{ secrets.GITHUB_TOKEN }}
