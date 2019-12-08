@@ -16,6 +16,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Run as local
+        run: |
+          git remote add github "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
+          git pull github ${GITHUB_REF} --ff-only
       - name: npm install, build, and test
         run: |
           npm ci
@@ -25,15 +29,15 @@ jobs:
           CI: true
       - name: commit
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          # git config --local user.email "action@github.com"
+          # git config --local user.name "GitHub Action"
           git commit -m "deploy" -a
-      - name: push
-        uses: ad-m/github-push-action@master
-        with:
-          directory: ./build
-          branch: refs/heads/deploy
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: push
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     directory: ./build
+      #     branch: refs/heads/deploy
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: deploy
         run: |
           git config --local user.email "action@github.com"
