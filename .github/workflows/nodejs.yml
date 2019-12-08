@@ -23,14 +23,19 @@ jobs:
           npm run test --if-present
         env:
           CI: true
-      - name: deploy
+      - name: commit
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git commit -m "deploy" -a
-      - name: Push changes
+      - name: push
         uses: ad-m/github-push-action@master
         with:
           directory: ./build
           branch: refs/heads/deploy
           github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: deploy
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git subtree push --prefix build origin deploy
