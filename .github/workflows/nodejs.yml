@@ -35,7 +35,6 @@ jobs:
           branch: refs/heads/deploy
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: deploy
-        uses: ad-m/github-push-action@master
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
